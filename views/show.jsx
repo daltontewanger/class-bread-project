@@ -19,6 +19,9 @@ function Show({ bread, index }) {
         <li>
             <a href='/bread'>Go Home</a>
         </li>
+        <li>
+            <a href={`/bread/${index}/edit`}>Edit</a>
+        </li>
         <form action={`/bread/${index}?_method=DELETE`} method='POST'>
           <input type='submit' value='DELETE' />
         </form>
