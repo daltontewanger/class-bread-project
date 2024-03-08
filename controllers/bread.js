@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
     })
 })
 
+// Render New Page
 router.get('/new', (req, res) => {
     res.render('new')
 })
@@ -16,11 +17,12 @@ router.get('/new', (req, res) => {
 router.get('/:index', (req, res) => {
     const { index } = req.params
     res.render('show', {
-        bread: Bread[index]
+        bread: Bread[index],
+        index
     })                                                                                                                             
 })
 
-// CREATE
+// CREATE bread
 router.post('/', (req, res) => {
     if (!req.body.image) req.body.image = 'https://houseofnasheats.com/wp-content/uploads/2022/02/French-Bread-1.jpg'
     if (req.body.hasGluten === 'on') {
@@ -29,6 +31,13 @@ router.post('/', (req, res) => {
         req.body.hasGluten = false
     }
     Bread.push(req.body)
+    res.redirect('/bread')
+})
+
+// DELETE Bread
+router.delete('/:index', (req, res) => {
+    const { index } = req.params
+    Bread.splice(index, 1)
     res.redirect('/bread')
 })
 

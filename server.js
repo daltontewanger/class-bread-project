@@ -1,10 +1,12 @@
 const express = require("express");
+const methodOverride = require('method-override')
 require("dotenv").config();
 const breadRoutes = require("./controllers/bread");
 
 const app = express();
 
 // middlewares
+app.use(methodOverride('_method'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public') )
 app.set("views", __dirname + "/views");
