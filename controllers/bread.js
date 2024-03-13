@@ -62,9 +62,9 @@ router.put('/:index', (req, res) => {
 })
 
 // DELETE Bread
-router.delete('/:index', (req, res) => {
-    const { index } = req.params
-    Bread.splice(index, 1)
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params
+    await Bread.findByIdAndDelete(id)
     res.redirect('/bread')
 })
 
