@@ -3,6 +3,7 @@ const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 require("dotenv").config();
 const breadRoutes = require("./controllers/bread");
+const seedRoutes = require("./controllers/bread_seed");
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.engine("jsx", require("express-react-views").createEngine());
 
 // routes
 app.use("/bread", breadRoutes);
+app.use("/bread", seedRoutes);
 
 // db connection
 mongoose.connect(process.env.MONGO_URI)
