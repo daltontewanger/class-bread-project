@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Bread = require("../models/bread");
+const Baker = require("../models/baker");
 
 router.get("/data/seed", async (req, res) => {
     const seedData = [
@@ -28,7 +29,14 @@ router.get("/data/seed", async (req, res) => {
           "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80",
       },
     ];
-  
+    
+    const bakers = await Baker.find()
+    const bakerIds = bakers.map(baker => baker.id)
+    seedData.forEach(bread => {
+      const randomId = bakerIds[Math.floor(Math.random() * bakerIds)]
+      bread.baker = randomId
+    })
+
     await Bread.deleteMany();
     await Bread.insertMany(seedData);
     res.redirect("/bread");
