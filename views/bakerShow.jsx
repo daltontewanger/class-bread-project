@@ -17,6 +17,9 @@ function BakerShow({ baker }) {
       </p>
       <h3>Breads {baker.name} has baked</h3>
       <ul>{breads}</ul>
+      <form action={`/baker/${baker.id}?_method=DELETE`} method='POST'>
+          <input type='submit' value='DELETE' />
+        </form>
     </Default>
   );
 }
